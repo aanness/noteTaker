@@ -1,10 +1,10 @@
-// This will be your standard server.js file where you
-// will initialize the server 
-
 // Dependencies
 // =============================================================
 const express = require("express");
 const fs = require("fs");
+const util = require("util");
+const db = require("./db/notesData");
+const path = require("path");
 
 // Sets up the Express App
 // =============================================================
@@ -15,10 +15,11 @@ var PORT = process.env.PORT || 8080
 // =============================================================
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/assets", express.static("./assets"));
+app.use(express.static('public'));
 
-require(".routes/html-routes")(app);
-require(".routes/api-routes")(app);
+
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 
 // Starts the server to begin listening
